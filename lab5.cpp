@@ -1,0 +1,100 @@
+﻿#include <iostream>
+#include <vector>
+using namespace std;
+
+int secondaryFunction(int n1, int n2, int n3) {
+    cout << "сумма максимального и минимального" << endl;
+    int max_value = max({ n1, n2, n3 });
+    int min_value = min({ n1, n2, n3 });
+    int sum = max_value + min_value;
+    return sum;
+}
+int secondaryFunction(int n1) {
+    cout << "Ближайшее кратное 5:" << endl;
+    int crt = 0;
+    int remainder = n1 % 5;
+    if (remainder == 0) {
+        return n1; 
+    }
+    if (remainder > 0) {
+        if (remainder <= 2) {
+            return n1 - remainder;
+        }
+        else {
+            return n1 + (5 - remainder);
+        }
+    }
+    else {
+        if (remainder >= -2 ) {
+            return n1 - remainder;
+        }
+        else {
+            return n1 - (5 + remainder);
+        }
+    }
+}
+
+int mainFunction(int num1, int num2, int num3) {
+    vector<int> nonZeroNumbers;
+
+    if (num1 != 0) {
+        nonZeroNumbers.push_back(num1);
+    }
+    if (num2 != 0) {
+        nonZeroNumbers.push_back(num2);
+    }
+    if (num3 != 0) {
+        nonZeroNumbers.push_back(num3);
+    }
+    if (nonZeroNumbers.size() == 1) {
+        return secondaryFunction(nonZeroNumbers[0]);
+    }
+    if (nonZeroNumbers.size() == 3) {
+        return secondaryFunction(nonZeroNumbers[0], nonZeroNumbers[1], nonZeroNumbers[2]);
+    }
+    if (nonZeroNumbers.size() == 2) {
+        cout << "Некоретно введееное число" << endl;
+        return 0;
+    }
+    if (nonZeroNumbers.size() == 0) {
+        cout << "Некоретно введееное число" << endl;
+        return 0;
+    }
+}
+
+void task1() {
+    int a, b, c;
+    cout << "Введите 3 числа: ";
+    cin >> a >> b >> c;
+    cout << mainFunction(a, b, c) << endl;}
+void task2(unsigned short  didj) {
+
+    long long x1 = -didj;
+    cout << "Обратное число для х: ";
+    cout << x1;
+    double x2 = sqrt(didj);
+    double x5 = pow(didj, 1.0 / 5);
+    cout << endl;
+    cout << "Степени 2-я: " << x2 << " и 5-я: " << x5 << endl;
+    cout << "long long, занимает " << sizeof(x1) * 8 << " бит(а), мин.значение: " << numeric_limits<long long>::lowest() << " макс.значение = " << numeric_limits<long long>::max() << endl;
+    cout << "double, занимает " << sizeof(x2) * 8 << " бит(а), мин.значение: " << numeric_limits<double>::lowest() << " макс.значение = " << numeric_limits<double>::max() << endl; 
+}
+
+    int main() {
+        setlocale(LC_ALL, "Russian");
+        bool flag;
+        cout << "Введите номер вопроса (попрос 1 - 0, вопрос 2 - 1)" << endl;
+        cin >> flag;
+        if (flag) {
+            unsigned short didj;
+
+            cout << "Введите число: " << endl;
+            cin >> didj;
+            task2(didj);
+        }
+        else {
+            task1();
+        }
+    
+        return 0;
+    }
