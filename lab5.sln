@@ -1,31 +1,101 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.14.36511.14 d17.14
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lab5", "lab5\lab5.vcxproj", "{BB326316-7D9D-46DA-B414-D0A4C1349C34}"
-EndProject
-Global
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|x64 = Debug|x64
-		Debug|x86 = Debug|x86
-		Release|x64 = Release|x64
-		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BB326316-7D9D-46DA-B414-D0A4C1349C34}.Debug|x64.ActiveCfg = Debug|x64
-		{BB326316-7D9D-46DA-B414-D0A4C1349C34}.Debug|x64.Build.0 = Debug|x64
-		{BB326316-7D9D-46DA-B414-D0A4C1349C34}.Debug|x86.ActiveCfg = Debug|Win32
-		{BB326316-7D9D-46DA-B414-D0A4C1349C34}.Debug|x86.Build.0 = Debug|Win32
-		{BB326316-7D9D-46DA-B414-D0A4C1349C34}.Release|x64.ActiveCfg = Release|x64
-		{BB326316-7D9D-46DA-B414-D0A4C1349C34}.Release|x64.Build.0 = Release|x64
-		{BB326316-7D9D-46DA-B414-D0A4C1349C34}.Release|x86.ActiveCfg = Release|Win32
-		{BB326316-7D9D-46DA-B414-D0A4C1349C34}.Release|x86.Build.0 = Release|Win32
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {A53CFC71-46BF-438D-9F98-4774F328A16F}
-	EndGlobalSection
-EndGlobal
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int secondaryFunction(int n1, int n2, int n3) {
+    cout << "сумма максимального и минимального" << endl;
+    int max_value = max({ n1, n2, n3 });
+    int min_value = min({ n1, n2, n3 });
+    int sum = max_value + min_value;
+    return sum;
+}
+int secondaryFunction(int n1) {
+    cout << "Ближайшее кратное 5:" << endl;
+    int crt = 0;
+    int remainder = n1 % 5;
+    if (remainder == 0) {
+        return n1; 
+    }
+    if (remainder > 0) {
+        if (remainder <= 2) {
+            return n1 - remainder;
+        }
+        else {
+            return n1 + (5 - remainder);
+        }
+    }
+    else {
+        if (remainder >= -2 ) {
+            return n1 - remainder;
+        }
+        else {
+            return n1 - (5 + remainder);
+        }
+    }
+}
+
+int mainFunction(int num1, int num2, int num3) {
+    vector<int> nonZeroNumbers;
+
+    if (num1 != 0) {
+        nonZeroNumbers.push_back(num1);
+    }
+    if (num2 != 0) {
+        nonZeroNumbers.push_back(num2);
+    }
+    if (num3 != 0) {
+        nonZeroNumbers.push_back(num3);
+    }
+    if (nonZeroNumbers.size() == 1) {
+        return secondaryFunction(nonZeroNumbers[0]);
+    }
+    if (nonZeroNumbers.size() == 3) {
+        return secondaryFunction(nonZeroNumbers[0], nonZeroNumbers[1], nonZeroNumbers[2]);
+    }
+    if (nonZeroNumbers.size() == 2) {
+        cout << "Некоретно введееное число" << endl;
+        return 0;
+    }
+// теперь он указывает 0 0 0 как неверное
+    if (nonZeroNumbers.size() == 0) {
+        cout << "Некоретно введееное число" << endl;
+        return 0;
+    }
+}
+
+void task1() {
+    int a, b, c;
+    cout << "Введите 3 числа: ";
+    cin >> a >> b >> c;
+    cout << mainFunction(a, b, c) << endl;}
+void task2(unsigned short  didj) {
+
+    long long x1 = -didj;
+    cout << "Обратное число для х: ";
+    cout << x1;
+    double x2 = sqrt(didj);
+    double x5 = pow(didj, 1.0 / 5);
+    cout << endl;
+    cout << "Степени 2-я: " << x2 << " и 5-я: " << x5 << endl;
+    cout << "long long, занимает " << sizeof(x1) * 8 << " бит(а), мин.значение: " << numeric_limits<long long>::lowest() << " макс.значение = " << numeric_limits<long long>::max() << endl;
+    cout << "double, занимает " << sizeof(x2) * 8 << " бит(а), мин.значение: " << numeric_limits<double>::lowest() << " макс.значение = " << numeric_limits<double>::max() << endl; 
+}
+
+    int main() {
+        setlocale(LC_ALL, "Russian");
+        bool flag;
+        cout << "Введите номер вопроса (попрос 1 - 0, вопрос 2 - 1)" << endl;
+        cin >> flag;
+        if (flag) {
+            unsigned short didj;
+
+            cout << "Введите число: " << endl;
+            cin >> didj;
+            task2(didj);
+        }
+        else {
+            task1();
+        }
+    
+        return 0;
+    }
